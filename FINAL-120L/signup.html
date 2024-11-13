@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup - Bad Shot Tattoo & Piercing</title>
+  <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <img src="logo.jpg" alt="Bad Shot Tattoo & Piercing Logo">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="Home.html">Home</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="booknow.html">Book Now</a></li>
+          <li><a href="Login.html">Login</a></li>
+          <li><a href="signup.html">Signup</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="signup">
+    <h2>SIGNUP</h2>
+    <div class="form-container">
+      <form id="signupForm">
+        <div class="info-section">
+          <h3>Account Information</h3>
+          <div class="input-container">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="email" id="email" name="email" placeholder="Email Address" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-button">SIGN UP</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Bad Shot Tattoo & Piercing. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+  
+      let username = document.getElementById('username').value;
+      let email = document.getElementById('email').value;
+      let password = document.getElementById('password').value;
+      let confirmPassword = document.getElementById('confirmPassword').value;
+
+      // Check if passwords match
+      if (password !== confirmPassword) {
+          alert('Passwords do not match.');
+          return;
+      }
+
+      // Prepare the user data
+      const userData = {
+          username: username,
+          email: email,
+          password: password // You may want to hash the password before storing it
+      };
+
+      // Load existing users data from localStorage or initialize empty array
+      let usersData = JSON.parse(localStorage.getItem('usersData')) || [];
+
+      // Check if email already exists
+      for (let user of usersData) {
+          if (user.email === email) {
+              alert('Email already exists. Please use a different email.');
+              return;
+          }
+      }
+
+      // Add new user to the data
+      usersData.push(userData);
+
+      // Save updated data back to localStorage
+      localStorage.setItem('usersData', JSON.stringify(usersData));
+
+      alert('Signup successful! You can now login here.');
+      window.location.href = 'Login.html'; // Redirect to login page
+    });
+  </script>
+
+</body>
+</html>

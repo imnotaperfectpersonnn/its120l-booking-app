@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Now - Bad Shot Tattoo & Piercing</title>
+    <link rel="stylesheet" href="booknow.css"> 
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="logo.jpg" alt="Bad Shot Tattoo & Piercing Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="About.html">About</a></li>
+                    <li><a href="booknow.html">Book Now</a></li>
+                    <li><a href="Login.html">Login</a></li>
+                    <li><a href="signup.html">Signup</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="book-now">
+        <h2>BOOK NOW</h2>
+
+        <div class="form-container">
+            <form id="bookingForm" action="booknow.php" method="post"> 
+                <div class="info-section">
+                    <h3>Customer Information</h3>
+                    <div class="input-container">
+                        <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+                        <input type="email" id="email" name="email" placeholder="Email Address" required>
+                        <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Phone Number" required>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3>Appointment Details</h3>
+                    <div class="input-container">
+                        <input type="datetime-local" id="dateTime" name="dateTime" placeholder="Preferred Date and Time"
+                            required>
+                        <select id="serviceType" name="serviceType">
+                            <option value="">Type of Service</option>
+                            <option value="tattoo">Tattoo</option>
+                            <option value="piercing">Piercing</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3>Additional Information</h3>
+                    <div class="input-container">
+                        <input type="text" id="allergies" name="allergies"
+                            placeholder="Allergies (Please indicate if any)">
+                        <textarea id="notes" name="notes" placeholder="Special Request or Notes"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button" id="bookNowBtn">BOOK NOW!</button> 
+            </form>
+        </div>
+    </section>
+
+    <div id="popup" class="hidden"> 
+        <div class="popup-content">
+            <p>Thank you for booking with us!</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Bad Shot Tattoo & Piercing. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('bookingForm');
+        const popup = document.getElementById('popup');
+        const body = document.body;
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); 
+
+            if (form.checkValidity()) { 
+                body.classList.add('blur');
+                popup.classList.remove('hidden');
+
+                setTimeout(() => {
+                    popup.classList.add('hidden');
+                    body.classList.remove('blur');
+                    form.submit();
+                }, 3000);
+            } else {
+                alert('Please fill in all required fields.');
+            }
+        });
+    </script>
+</body>
+</html>

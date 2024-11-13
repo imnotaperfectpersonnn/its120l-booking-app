@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Bad Shot Tattoo & Piercing</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <img src="logo.jpg" alt="Bad Shot Tattoo & Piercing Logo">
+      </div>
+      <nav>
+        <ul>
+          <li><a href="Home.html">Home</a></li>
+          <li><a href="About.html">About</a></li>
+          <li><a href="booknow.html">Book Now</a></li>
+          <li><a href="Login.html">Login</a></li>
+          <li><a href="signup.html">Signup</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="login">
+    <h2>LOGIN</h2>
+    <div class="form-container">
+      <form id="loginForm">
+        <div class="info-section">
+          <h3>Login Information</h3>
+          <div class="input-container">
+            <input type="text" id="identifier" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Password" required>
+          </div>
+        </div>
+        <button type="submit" class="submit-button">LOGIN</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Bad Shot Tattoo & Piercing. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        let identifier = document.getElementById('identifier').value.trim();  // Trim any extra spaces
+        let password = document.getElementById('password').value.trim();  // Trim any extra spaces
+
+        // Log the entered values for debugging
+        console.log('Entered Email:', identifier);
+        console.log('Entered Password:', password);
+
+        // Simple check to see if any email and password are entered.
+        // For now, we're just assuming that anything valid should work.
+        if (identifier && password) {
+            localStorage.setItem('loggedInUser', JSON.stringify({ email: identifier, password: password })); // Save user
+            window.location.href = 'BookSum.html'; // Redirect to the booking page
+        } else {
+            alert('Please enter both email and password.');
+        }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Summary - Bad Shot Tattoo & Piercing</title>
+    <link rel="stylesheet" href="BookSum.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="logo.jpg" alt="Bad Shot Tattoo & Piercing Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="Home.html">Home</a></li>
+                    <li><a href="About.html">About</a></li>
+                    <li><a href="booknow.html">Book Now</a></li>
+                    <li><a href="Login.html">Login</a></li>
+                    <li><a href="signup.html">Signup</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="summary">
+        <h2>BOOKING SUMMARY</h2>
+
+        <div class="form-container">
+            <div class="info-section">
+                <h3>Customer Information</h3>
+                <div class="input-container">
+                    <p>Full Name: <span id="fullName"></span></p>
+                    <p>Email Address: <span id="email"></span></p>
+                    <p>Phone Number: <span id="phoneNumber"></span></p>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>Appointment Details</h3>
+                <div class="input-container">
+                    <p>Preferred Date and Time: <span id="dateTime"></span></p>
+                    <p>Type of Service: <span id="serviceType"></span></p>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>Additional Information</h3>
+                <div class="input-container">
+                    <p>Allergies: <span id="allergies"></span></p>
+                    <p>Special Request or Notes: <span id="notes"></span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Bad Shot Tattoo & Piercing. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Check if a user is logged in
+        let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+    
+        if (!loggedInUser) {
+            alert('You must be logged in to view this page.');
+            window.location.href = 'Login.html'; // Redirect to login page if not logged in
+        } else {
+            fetch('booknow.json')
+                .then(response => response.json())
+                .then(data => {
+                    // Find the booking that matches the logged-in user's email
+                    const userBooking = data.find(booking => booking.email === loggedInUser.email);
+    
+                    if (userBooking) {
+                        document.getElementById('fullName').textContent = userBooking.fullName;
+                        document.getElementById('email').textContent = userBooking.email;
+                        document.getElementById('phoneNumber').textContent = userBooking.phoneNumber;
+                        document.getElementById('dateTime').textContent = userBooking.appointmentDateTime;
+                        document.getElementById('serviceType').textContent = userBooking.serviceType;
+                        document.getElementById('allergies').textContent = userBooking.allergies;
+                        document.getElementById('notes').textContent = userBooking.notes;
+                    } else {
+                        alert('No booking found for this user. Please go to Book Now to create a booking.');
+                        window.location.href = 'booknow.html'; // Redirect to the booking page
+                    }
+                })
+                .catch(error => {
+                    alert('No booking found for this user. Please go to Book Now to create a booking.');
+                    window.location.href = 'booknow.html'; // Redirect to the booking page
+                });
+        }
+    </script>
+    
+    
+</body>
+</html>
